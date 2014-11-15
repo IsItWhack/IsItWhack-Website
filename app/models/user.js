@@ -36,7 +36,8 @@
                 publicFields: [
                     'id',
                     'full_name',
-                    'email'
+                    'email',
+                    'encrypted_password'
                 ],
                 editableFields: [
                     'full_name',
