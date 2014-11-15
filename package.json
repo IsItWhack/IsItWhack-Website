@@ -1,0 +1,11 @@
+{
+  "name": "isitwhack",
+  "version": "1.0.0",
+  "description": "IsItWhack.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "Mike Lyons <mdl0394@gmail.com>",
+  "license": "MIT"
+}
