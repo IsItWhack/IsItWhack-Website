@@ -48,7 +48,7 @@
      * @param required_version The version that is required
      * @returns {Function} An express function that checks the version
      */
-    module.exports.checkVersion = function( required_version ) { // TODO: MOWB-147: Should versioning be a greater then system (https://markone.atlassian.net/browse/MOWB-147)
+    module.exports.checkVersion = function( required_version ) {
         return function( req, res, next ) {
             if( req.header( 'mkone-api-version' ) && parseInt( req.header( 'mkone-api-version' ) ) && parseInt( req.header( 'mkone-api-version' ) ) >= required_version ) {
                 next();
