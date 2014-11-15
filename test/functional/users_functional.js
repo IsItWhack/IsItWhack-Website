@@ -27,7 +27,6 @@
         } );
 
         it( 'Should be able to create user', function( done ) {
-
             var user_to_create = {
                 full_name: 'Test User',
                 email: 'test@test.com',
@@ -55,7 +54,6 @@
 
                     done();
                 } );
-
         } );
     } );
 
