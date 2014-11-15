@@ -17,6 +17,10 @@
             expires: {
                 type: DataTypes.DATE,
                 allowNull: false
+            },
+            client_id: {
+                type: DataTypes.STRING,
+                allowNull: false
             }
         }, {
             underscored: true,
@@ -40,8 +44,7 @@
                 },
                 standardInclude: function( db ) {
                     return [
-                        {}
-                    ]
+                    ];
                 }
             }
         } );

@@ -108,7 +108,7 @@
             controllers.initialize( app );
 
             app.use( function( err, req, res, next ) {
-                console.log( err );
+                console.log( err.stack );
                 if( req.transaction ) {
                     console.log( 'Closing transaction' );
                     req.transaction.rollback().bind( req.transaction );
