@@ -58,4 +58,57 @@
         }
     }
 
+    /**
+     * Returns a promise that commits the given transaction, and sends the value that was passed in from the previous
+     * promise through the given res
+     *
+     * Intended to be the end of a promise chain
+     * eg:
+     *      User
+     *          .all( {
+     *             transaction: req.transaction
+     *          } )
+     *          .then( commitAndSend( req.transaction, res ) ); // Will send the results of User.all() after commiting
+     *
+     * @param transaction The transaction to commit
+     * @param res The response to send the value through
+     * @returns {Function} Promise that commits the transaction and then sends the response
+     */
+    module.exports.commitAndSend = function( transaction, res ) {
+        return function commitAndSend( response ) {
+            transaction
+                .commit().bind( transaction )
+                .then( function send() {
+                    res.send( response );
+                } )
+        }
+    };
+
+    /**
+     * Returns a promise that rollbacks the given transaction, and sends the value that was passed in from the previous
+     * promise through the given next function
+     *
+     * Intended to be the end of a promise chain, to handle thrown errors in the catch method
+     * eg:
+     *      User
+     *          .all( {
+     *             transaction: req.transaction
+     *          } )
+     *          .then( commitAndSend( req.transaction, res ) )
+     *          .catch( rollbackAndFail( req.transaction, next ) )
+     *
+     * @param transaction The transaction to be rolled back
+     * @param next The function to be called with the error
+     * @returns {Function} Promise that rolls back the transaction, and calls the next function with the error
+     */
+    module.exports.rollbackAndFail = function( transaction, next ) {
+        return function rollbackAndFail( err ) {
+            transaction
+                .rollback().bind( transaction )
+                .then( function fail() {
+                    next( err );
+                } )
+        }
+    };
+
 })();
