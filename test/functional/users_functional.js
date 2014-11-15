@@ -8,11 +8,10 @@
 (function() {
     'use strict';
 
-    var helper = require( '../lib/helper' )
-      , chai = require( 'chai' )
-      , assert = chai.assert
-      , request = require( 'supertest-mlyons' )( 'http://localhost:1337' )
-    ;
+    var helper = require( '../lib/helper' ),
+        chai = require( 'chai' ),
+        assert = chai.assert,
+        request = require( 'supertest-mlyons' )( 'http://localhost:1337' );
 
     describe( 'Users functional tests', function userUnitTests() {
 
