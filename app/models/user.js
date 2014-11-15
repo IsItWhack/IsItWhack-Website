@@ -1,8 +1,8 @@
 /**
- * Copyright of Mark One Lifestyle Inc.
+ * Copyright of IsItWhack.com
  *
  * Authors:
- *     - Mike Lyons (m@mkone.co)
+ *     - Mike Lyons (m@IsItWhack.com)
  */
 
 (function() {
