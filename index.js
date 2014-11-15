@@ -12,7 +12,7 @@
         logger = require( "./lib/logger" );
 
     server.start( {
-        database_name: 'mkonerest_development',
+        database_name: 'isitwhack_development',
         sequelize_logging: console.log,
         logging_level: 'd'
     } );
