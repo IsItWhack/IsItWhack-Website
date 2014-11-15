@@ -37,7 +37,7 @@
         return function( second ) {
             if( second.server_revision !== first.server_revision ) {
                 console.log( 'Revision number incorrect ' + first.server_revision + ' !== ' + second.server_revision );
-                throw new WebError( 400, 4001,'Revision not correct' );
+                throw new WebError( 400, 4001, 'Revision not correct' );
             }
             return second;
         }

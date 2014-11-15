@@ -21,17 +21,17 @@
         previously_initialized = true;
 
         var sequelize = new Sequelize(
-                opts.database_name,
-                opts.database_username,
-                opts.database_password,
-                {
-                    dialect: "postgres",
-                    protocol: "postgres",
-                    port: opts.database_port,
-                    host: opts.database_url,
-                    logging: opts.sequelize_logging,
-                    native: opts.native
-                } );
+            opts.database_name,
+            opts.database_username,
+            opts.database_password,
+            {
+                dialect: "postgres",
+                protocol: "postgres",
+                port: opts.database_port,
+                host: opts.database_url,
+                logging: opts.sequelize_logging,
+                native: opts.native
+            } );
 
         // Load all models in directory
         fs
@@ -41,13 +41,13 @@
             } )
             .forEach( function filenameHandler( filename ) {
                 var model = sequelize.import( path.join( __dirname, filename ) );
-                models[ model.name ] = model;
+                models[model.name] = model;
             } );
 
         // Allow each model to create it's associations
         Object.keys( models ).forEach( function modelHandler( modelname ) {
-            if( models[ modelname ].options.hasOwnProperty( 'associate' ) ) {
-                models[ modelname ].options.associate( models );
+            if( models[modelname].options.hasOwnProperty( 'associate' ) ) {
+                models[modelname].options.associate( models );
             }
         } );
 

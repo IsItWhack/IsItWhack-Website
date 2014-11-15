@@ -21,7 +21,7 @@
         }, {
             underscored: true,
             associate: function( models ) {
-                AccessToken.belongsTo( models.User, { foreignKey: 'user_id', as: 'user' } );
+                AccessToken.belongsTo( models.User, {foreignKey: 'user_id', as: 'user'} );
             },
             classMethods: {
                 publicFields: [

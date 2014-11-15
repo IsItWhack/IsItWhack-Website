@@ -21,7 +21,7 @@
         }, {
             underscored: true,
             associate: function( models ) {
-                RefreshToken.belongsTo( models.User, { foreignKey: 'user_id', as: 'user' } );
+                RefreshToken.belongsTo( models.User, {foreignKey: 'user_id', as: 'user'} );
             },
             classMethods: {
                 publicFields: [
@@ -40,12 +40,10 @@
                 },
                 standardInclude: function( db ) {
                     return [
-                        {
-
-                        }
+                        {}
                     ]
                 }
-            },
+            }
         } );
 
         return RefreshToken;

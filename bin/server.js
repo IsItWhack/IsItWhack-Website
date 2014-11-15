@@ -10,7 +10,7 @@
 
     var express = require( 'express' ),
         body_parser = require( 'body-parser' ),
-        compress = require('compression' ),
+        compress = require( 'compression' ),
         logger = require( '../lib/logger' ),
         logger_init = false,
         WebError = require( '../lib/error' ).WebError,
@@ -85,6 +85,7 @@
                     req.transaction.commit().bind( req.transaction );
                 }
             }
+
             res.on( 'finish', commitTransaction );
             res.on( 'close', commitTransaction );
             next();
@@ -92,21 +93,21 @@
 
         app.oauth = oauthserver( {
             model: oauth(), // See below for specification
-            grants: [ 'password', 'refresh_token' ],
+            grants: ['password', 'refresh_token'],
             debug: true
         } );
 
-        app.get('/', app.oauth.authorise(), function (req, res) {
-            res.send('Secret area');
-        });
+        app.get( '/', app.oauth.authorise(), function( req, res ) {
+            res.send( 'Secret area' );
+        } );
 
-        app.all('/token', app.oauth.grant());
+        app.all( '/token', app.oauth.grant() );
 
         server = app.listen( port, function listenCallback() {
             // Initialize Controllers
             controllers.initialize( app );
 
-            app.use( function( err, req, res, next ){
+            app.use( function( err, req, res, next ) {
                 console.log( err );
                 if( req.transaction ) {
                     console.log( 'Closing transaction' );
@@ -114,9 +115,9 @@
                 }
                 req.failed = true;
                 if( err instanceof WebError ) {
-                    res.status( err.web_error ).send( { 'error': err.value, 'message': err.message } );
+                    res.status( err.web_error ).send( {'error': err.value, 'message': err.message} );
                 } else {
-                    res.status( 500 ).send( { 'error': err } );
+                    res.status( 500 ).send( {'error': err} );
                 }
             } );
 
@@ -159,22 +160,22 @@
 
         var chunks = [];
 
-        res.write = function (chunk) {
-            chunks.push(chunk);
+        res.write = function( chunk ) {
+            chunks.push( chunk );
 
-            oldWrite.apply(res, arguments);
+            oldWrite.apply( res, arguments );
         };
 
-        res.end = function (chunk) {
-            if (chunk)
-                chunks.push(chunk);
+        res.end = function( chunk ) {
+            if( chunk )
+                chunks.push( chunk );
 
-            var body = Buffer.concat(chunks).toString('utf8');
+            var body = Buffer.concat( chunks ).toString( 'utf8' );
             logger.d( "Response" );
-            logger.d(req.path, body);
+            logger.d( req.path, body );
             logger.d( "============= End Request =============" );
 
-            oldEnd.apply(res, arguments);
+            oldEnd.apply( res, arguments );
         };
 
         next();

@@ -58,7 +58,7 @@
 
                     options = options || {};
                     options.attributes = _.union( options.attributes, User.publicFields );
-                    options.include = _.union( options.include, User.standardInclude( models ) )
+                    options.include = _.union( options.include, User.standardInclude( models ) );
 
                     return User
                         .find( options, {
@@ -66,8 +66,7 @@
                         } );
                 }
             },
-            instanceMethods: {
-            },
+            instanceMethods: {},
             associate: function( models ) {
                 User.hasMany( models.AccessToken );
                 User.hasMany( models.RefreshToken );
