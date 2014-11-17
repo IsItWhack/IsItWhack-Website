@@ -50,7 +50,7 @@
         return function( req ) {
             return Rateable
                 .create( req.body, {
-                    transaction: transaction
+                    transaction: transaction,
                     fields: Rateable.editableFields
                 } )
         }
