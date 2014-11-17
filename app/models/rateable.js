@@ -8,6 +8,8 @@
 (function() {
     'use strict';
 
+    var _ = require( 'underscore' );
+
     module.exports = function initRateable( sequelize, DataTypes ) {
         var Rateable = sequelize.define( 'Rateable', {
             name: {
@@ -47,6 +49,30 @@
                     return [
                         db.User.parentInclude( db )
                     ]
+                },
+                getAll: function( opt1, opt2 ) {
+                    var public_fields = Rateable.publicFields;
+
+                    var default_opt1 = {
+                        attributes: public_fields
+                    };
+
+                    _.extend( opt1, default_opt1 );
+
+                    return Rateable
+                        .findAll( opt1, opt2 );
+                },
+                get: function( opt1, opt2 ) {
+                    var public_fields = Rateable.publicFields;
+
+                    var default_opt1 = {
+                        attributes: public_fields
+                    };
+
+                    _.extend( opt1, default_opt1 );
+
+                    return Rateable
+                        .find( opt1, opt2 );
                 }
             }
         } );
