@@ -51,18 +51,6 @@
                     ]
                 },
                 getAll: function( opt1, opt2 ) {
-                    var public_fields = Rateable.publicFields;
-
-                    var default_opt1 = {
-                        attributes: public_fields
-                    };
-
-                    _.extend( opt1, default_opt1 );
-
-                    return Rateable
-                        .findAll( opt1, opt2 );
-                },
-                get: function( opt1, opt2 ) {
                     var sequelize = require( './' ).db.sequelize;
 
                     var query = "SELECT ";
@@ -93,7 +81,11 @@
 
                     query += " GROUP BY \"Rateables\".\"id\"";
 
-                    return sequelize.query( query, Rateable, opt2 )
+                    return sequelize.query( query, Rateable, opt2 );
+                },
+                get: function( opt1, opt2 ) {
+                    return Rateable
+                        .findAll( opt1, opt2 )
                         .then( function( rateables ) {
                             if( rateables ) return rateables[0];
                             return rateable;
