@@ -82,14 +82,14 @@
         _checkForIdUrlParam( req )
             .then( _getRateable( req.transaction ) )
             .then( controller.commitAndSend( req.transaction, res ) )
-            .then( controller.rollbackAndFail( req.transaction, next ) );
+            .catch( controller.rollbackAndFail( req.transaction, next ) );
     };
 
     var createRateable = function( req, res, next ) {
         _createRateable( req.transaction )
             .then( _getRateable( req.transaction ) )
             .then( controller.commitAndSend( req.transaction, res ) )
-            .then( controller.rollbackAndFail( req.transaction, next ) );
+            .catch( controller.rollbackAndFail( req.transaction, next ) );
     };
 
     var editRateable = function( req, res, next ) {
@@ -98,7 +98,7 @@
             .then( _editRateable( transaction, req.body ) )
             .then( _getRateable( req.transaction ) )
             .then( controller.commitAndSend( req.transaction, res ) )
-            .then( controller.rollbackAndFail( req.transaction, next ) );
+            .catch( controller.rollbackAndFail( req.transaction, next ) );
     };
 
     module.exports.addRoutes = function( app ) {

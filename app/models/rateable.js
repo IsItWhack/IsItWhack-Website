@@ -63,16 +63,41 @@
                         .findAll( opt1, opt2 );
                 },
                 get: function( opt1, opt2 ) {
-                    var public_fields = Rateable.publicFields;
+                    var sequelize = require( './' ).db.sequelize;
 
-                    var default_opt1 = {
-                        attributes: public_fields
-                    };
+                    var query = "SELECT ";
+                    var first = true;
+                    var fields = opt1.attributes ||  Rateable.publicFields;
+                   fields.forEach( function( field ) {
+                        if( !first ) query += ", ";
+                        else first = false;
 
-                    _.extend( opt1, default_opt1 );
+                        query += "\"Rateables\".\"" + field + "\""
+                    } );
 
-                    return Rateable
-                        .find( opt1, opt2 );
+                    query += ", COUNT( DISTINCT \"Upvotes\" ) AS \"upvotes\"";
+                    query += ", COUNT( DISTINCT \"Downvotes\" ) AS \"downvotes\"";
+
+                    query += " FROM \"Rateables\" JOIN \"Upvotes\" ON \"Rateables\".\"id\" = \"Upvotes\".\"rateable_id\"";
+                    query += " JOIN \"Downvotes\" ON \"Rateables\".\"id\" = \"Downvotes\".\"rateable_id\"";
+
+                    var where = opt1.where;
+
+                    if( where ) query += " WHERE";
+                    first = true;
+                    _.each( where, function( value, key ) {
+                        if( !first ) query += " AND";
+                        else first = false;
+                        query += " \"Rateables\".\"" + key + "\" = " + value;
+                    } );
+
+                    query += " GROUP BY \"Rateables\".\"id\"";
+
+                    return sequelize.query( query, Rateable, opt2 )
+                        .then( function( rateables ) {
+                            if( rateables ) return rateables[ 0 ];
+                            return rateable;
+                        } );
                 }
             }
         } );
