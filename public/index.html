@@ -1,10 +1,36 @@
-<!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Is It Whack</title>
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jquery.inputfit.js"></script>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+        }
+        h1 {
+            font-size: 60px;
+            padding: 0px;
+            margin: 0px;
+        }
+        #this {
+            font-size: 60px;
+            height: 80;
+            width: 800px;
+        }
+        #instruction {
+            color: #AAA;
+        }
+    </style>
+    <script>
+
+    </script>
 </head>
 <body>
-    No
+    <form action="/search" method="POST">
+        <h1>
+            <input id="this" type="text" placeholder="Is It Whack?" name="query" />
+        </h1>
+    </form>
 </body>
 </html>
