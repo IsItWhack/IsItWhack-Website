@@ -86,7 +86,8 @@
                             _.each( rateables, function( rateable ) {
                                 rateable.dataValues.downvotes = +rateable.dataValues.downvotes;
                                 rateable.dataValues.upvotes = +rateable.dataValues.upvotes;
-                                rateable.dataValues.total_votes = rateable.dataValues.upvotes - rateable.dataValues.downvotes;
+                                rateable.dataValues.total_votes = rateable.dataValues.upvotes + rateable.dataValues.downvotes;
+                                rateable.dataValues.computed_votes = rateable.dataValues.upvotes - rateable.dataValues.downvotes;
                             } );
                             return rateables;
                         } );
