@@ -24,7 +24,7 @@
             paranoid: true,
             underscored: true,
             associate: function( models ) {
-                Rateable.belongsTo( models.User, { foreignKey: 'user_id', as: 'user' } );
+                Rateable.belongsTo( models.User, {foreignKey: 'user_id', as: 'user'} );
             },
             classMethods: {
                 publicFields: [
@@ -67,8 +67,8 @@
 
                     var query = "SELECT ";
                     var first = true;
-                    var fields = opt1.attributes ||  Rateable.publicFields;
-                   fields.forEach( function( field ) {
+                    var fields = opt1.attributes || Rateable.publicFields;
+                    fields.forEach( function( field ) {
                         if( !first ) query += ", ";
                         else first = false;
 
@@ -95,7 +95,7 @@
 
                     return sequelize.query( query, Rateable, opt2 )
                         .then( function( rateables ) {
-                            if( rateables ) return rateables[ 0 ];
+                            if( rateables ) return rateables[0];
                             return rateable;
                         } );
                 }
