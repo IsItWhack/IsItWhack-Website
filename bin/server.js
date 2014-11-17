@@ -16,7 +16,8 @@
         WebError = require( '../lib/error' ).WebError,
         q = require( 'q' ),
         oauthserver = require( 'node-oauth2-server' ),
-        oauth = require( '../lib/oauth' );
+        oauth = require( '../lib/oauth' ),
+        path = require( 'path' );
 
     var models = require( '../app/models' ),
         controllers = require( '../app/controllers' );
@@ -97,11 +98,9 @@
             debug: true
         } );
 
-        app.get( '/', app.oauth.authorise(), function( req, res ) {
-            res.send( 'Secret area' );
-        } );
-
         app.all( '/token', app.oauth.grant() );
+
+        app.use( express.static( path.resolve( __dirname, '..', 'public' ) ) );
 
         server = app.listen( port, function listenCallback() {
             // Initialize Controllers
