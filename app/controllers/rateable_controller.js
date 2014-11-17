@@ -40,6 +40,7 @@
                 } );
         };
     };
+    module.exports.getRateable = _getRateable;
 
     var _checkForIdUrlParam = function( req ) {
         return q.try( function() {
@@ -49,6 +50,7 @@
             return req;
         } );
     };
+    module.exports.checkForIdParam = _checkForIdUrlParam;
 
     var _createRateable = function( transaction ) {
         return function( req ) {
