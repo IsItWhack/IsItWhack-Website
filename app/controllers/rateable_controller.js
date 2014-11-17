@@ -102,9 +102,9 @@
     };
 
     module.exports.addRoutes = function( app ) {
-        app.get( '/' + url_name, allRateables );
-        app.get( '/' + url_name + '/:' + url_param_name, getRateable );
-        app.post( '/' + url_name, createRateable );
-        app.put( '/' + url_name + '/:' + url_param_name, editRateable );
+        app.get( '/' + url_name,  app.oauth.authorise(), allRateables );
+        app.get( '/' + url_name + '/:' + url_param_name,  app.oauth.authorise(), getRateable );
+        app.post( '/' + url_name,  app.oauth.authorise(), createRateable );
+        app.put( '/' + url_name + '/:' + url_param_name,  app.oauth.authorise(), editRateable );
     };
 })();
