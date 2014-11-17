@@ -18,6 +18,9 @@
     var url_param_name = 'rateable_id';
     module.exports.url_param_name = url_param_name;
 
+    var url_name = 'rateables';
+    module.exports.url_name = url_name;
+
     var _getAllRateables = function( transaction ) {
         return Rateable
             .getAll( {}, {
@@ -97,9 +100,9 @@
     };
 
     module.exports.addRoutes = function( app ) {
-        app.get( '/rateables', allRateables );
-        app.get( '/rateables/:' + url_param_name, getRateable );
-        app.post( '/rateables', createRateable );
-        app.put( '/rateables/:' + url_param_name, editRateable );
+        app.get( '/' + url_name, allRateables );
+        app.get( '/' + url_name + '/:' + url_param_name, getRateable );
+        app.post( '/' + url_name, createRateable );
+        app.put( '/' + url_name + '/:' + url_param_name, editRateable );
     };
 })();
