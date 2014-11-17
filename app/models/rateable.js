@@ -81,7 +81,15 @@
 
                     query += " GROUP BY \"Rateables\".\"id\"";
 
-                    return sequelize.query( query, Rateable, opt2 );
+                    return sequelize.query( query, Rateable, opt2 )
+                        .then( function( rateables ) {
+                            _.each( rateables, function( rateable ) {
+                                rateable.dataValues.downvotes = +rateable.dataValues.downvotes;
+                                rateable.dataValues.upvotes = +rateable.dataValues.upvotes;
+                                rateable.dataValues.total_votes = rateable.dataValues.upvotes - rateable.dataValues.downvotes;
+                            } );
+                            return rateables;
+                        } );
                 },
                 get: function( opt1, opt2 ) {
                     return Rateable
