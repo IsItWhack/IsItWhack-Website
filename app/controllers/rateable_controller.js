@@ -16,6 +16,7 @@
         WebError = require( '../../lib/error' ).WebError;
 
     var url_param_name = 'rateable_id';
+    module.exports.url_param_name = url_param_name;
 
     var _getAllRateables = function( transaction ) {
         return Rateable
