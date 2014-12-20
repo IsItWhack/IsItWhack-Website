@@ -28,7 +28,7 @@
             } );
     };
 
-    var _getRateable = function( transaction ) {
+    var _getRateableFromParam = function( transaction ) {
         return function( req ) {
             return Rateable
                 .get( {
@@ -40,7 +40,20 @@
                 } );
         };
     };
-    module.exports.getRateable = _getRateable;
+    module.exports.getRateableFromParam = _getRateableFromParam;
+
+    var _getRateableFromBody = function( transaction ) {
+        return function( req ) {
+            return Rateable
+                .get( {
+                    where: {
+                        id: req.id
+                    }
+                }, {
+                    transaction: transaction
+                } )
+        };
+    };
 
     var _checkForIdUrlParam = function( req ) {
         return q.try( function() {
@@ -54,10 +67,16 @@
 
     var _createRateable = function( transaction ) {
         return function( req ) {
+            req.body.user_id = req.user.id;
+
+            // Add user_id to editable fields for creation
+            var editableFields = Rateable.editableFields;
+            editableFields.push( 'user_id' );
+
             return Rateable
                 .create( req.body, {
                     transaction: transaction,
-                    fields: Rateable.editableFields
+                    fields: editableFields
                 } )
         }
     };
@@ -80,23 +99,23 @@
 
     var getRateable = function( req, res, next ) {
         _checkForIdUrlParam( req )
-            .then( _getRateable( req.transaction ) )
+            .then( _getRateableFromParam( req.transaction ) )
             .then( controller.commitAndSend( req.transaction, res ) )
             .catch( controller.rollbackAndFail( req.transaction, next ) );
     };
 
     var createRateable = function( req, res, next ) {
-        _createRateable( req.transaction )
-            .then( _getRateable( req.transaction ) )
+        _createRateable( req.transaction )( req )
+            .then( _getRateableFromBody( req.transaction ) )
             .then( controller.commitAndSend( req.transaction, res ) )
             .catch( controller.rollbackAndFail( req.transaction, next ) );
     };
 
     var editRateable = function( req, res, next ) {
         _checkForIdUrlParam( req )
-            .then( _getRateable( req.transaction ) )
+            .then( _getRateableFromParam( req.transaction ) )
             .then( _editRateable( transaction, req.body ) )
-            .then( _getRateable( req.transaction ) )
+            .then( _getRateableFromBody( req.transaction ) )
             .then( controller.commitAndSend( req.transaction, res ) )
             .catch( controller.rollbackAndFail( req.transaction, next ) );
     };

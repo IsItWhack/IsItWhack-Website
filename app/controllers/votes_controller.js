@@ -47,7 +47,7 @@
     var addVote = function( req, res, next ) {
         rateable_controller
             .checkForIdParam( req )
-            .then( rateable_controller.getRateable( req.transaction ) )
+            .then( rateable_controller.getRateableFromParam( req.transaction ) )
             .then( _createVote( req.transaction, req.user.id, req.body ) )
             .then( controller.commitAndSend( req.transaction, res ) )
             .catch( controller.rollbackAndFail( req.transaction, next ) );
