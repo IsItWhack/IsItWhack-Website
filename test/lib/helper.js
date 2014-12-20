@@ -51,7 +51,10 @@
             .start( options_loader.loadOptions( process.env.NODE_ENV || 'test' ) )
             .then( function wipeDatabase( db ) {
                 return _deleteAll();
-            } );
+            } )
+            .then( function(){
+                // no-op: Return nothing so this can be chained into a done mocha command
+            } )
     };
 
     module.exports.after = function() {
