@@ -6,3 +6,5 @@ node_js:
 before_script:
   - psql -c 'create database isitwhack_test;' -U postgres
 env: NODE_ENV=travis
+after_success:
+  "curl http://isitwhack.com/php/deploy.php"
