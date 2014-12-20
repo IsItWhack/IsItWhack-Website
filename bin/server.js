@@ -112,7 +112,7 @@
 
             app.use( function( err, req, res, next ) {
                 console.log( err.stack );
-                if( req.transaction ) {
+                if( req.transaction && !req.transaction.finished ) {
                     console.log( 'Closing transaction' );
                     req.transaction.rollback().bind( req.transaction );
                 }
