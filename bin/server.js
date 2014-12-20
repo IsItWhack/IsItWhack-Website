@@ -15,7 +15,7 @@
         logger_init = false,
         WebError = require( '../lib/error' ).WebError,
         q = require( 'q' ),
-        oauthserver = require( 'node-oauth2-server' ),
+        oauthserver = require( 'oauth2-server-mlyons' ),
         oauth = require( '../lib/oauth' ),
         path = require( 'path' );
 
@@ -82,7 +82,7 @@
 
         app.use( function( req, res, next ) {
             function commitTransaction() {
-                if( !req.failed ) {
+                if( !req.failed && !req.transaction.finished ) {
                     req.transaction.commit().bind( req.transaction );
                 }
             }
@@ -98,7 +98,7 @@
             debug: true
         } );
 
-        app.all( '/token', app.oauth.grant() );
+        app.all( '/tokens', app.oauth.grant() );
 
         app.use( express.static( path.resolve( __dirname, '..', 'public' ) ) );
 
