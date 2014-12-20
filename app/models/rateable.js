@@ -66,8 +66,8 @@
                     query += ", COUNT( DISTINCT \"Upvotes\" ) AS \"upvotes\"";
                     query += ", COUNT( DISTINCT \"Downvotes\" ) AS \"downvotes\"";
 
-                    query += " FROM \"Rateables\" JOIN \"Upvotes\" ON \"Rateables\".\"id\" = \"Upvotes\".\"rateable_id\"";
-                    query += " JOIN \"Downvotes\" ON \"Rateables\".\"id\" = \"Downvotes\".\"rateable_id\"";
+                    query += " FROM \"Rateables\" LEFT JOIN \"Upvotes\" ON \"Rateables\".\"id\" = \"Upvotes\".\"rateable_id\"";
+                    query += " LEFT JOIN \"Downvotes\" ON \"Rateables\".\"id\" = \"Downvotes\".\"rateable_id\"";
 
                     var where = opt1.where;
 
@@ -76,7 +76,7 @@
                     _.each( where, function( value, key ) {
                         if( !first ) query += " AND";
                         else first = false;
-                        query += " \"Rateables\".\"" + key + "\" = " + value;
+                        query += " \"Rateables\".\"" + key + "\" = \'" + value + "\'";
                     } );
 
                     query += " GROUP BY \"Rateables\".\"id\"";
@@ -94,7 +94,7 @@
                 },
                 get: function( opt1, opt2 ) {
                     return Rateable
-                        .findAll( opt1, opt2 )
+                        .getAll( opt1, opt2 )
                         .then( function( rateables ) {
                             if( rateables ) return rateables[0];
                             return rateable;
