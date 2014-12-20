@@ -20,10 +20,11 @@
     module.exports.url_name = url_name;
 
     var search = function( req, res, next ) {
+        console.log( req.param( 'q' ) );
         res.redirect( 'http://interstellar.' + req.headers.host );
     };
 
     module.exports.addRoutes = function( app ) {
-        app.post( '/' + url_name, search );
+        app.get( '/' + url_name, search );
     };
 })();
