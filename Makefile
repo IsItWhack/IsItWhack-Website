@@ -1,4 +1,4 @@
 test:
-       @./node_modules/.bin/mocha -u tdd --reporter spec
+	@./node_modules/.bin/mocha --reporter spec --recursive test
 
-.PHONY test
+.PHONY:	test
