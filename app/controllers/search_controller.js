@@ -50,8 +50,9 @@
                 console.log( rateable );
                 return rateable.dataValues;
             } )
-            .then( _rateableToHtml() )
-            .then( controller.commitAndSend( req.transaction, res ) )
+            .then( function( rateable ) {
+                res.render( 'search', { rateable: rateable } );
+            } )
             .catch( controller.rollbackAndFail( req.transaction, next ) );
     };
 

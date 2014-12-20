@@ -55,6 +55,10 @@
 
         // Initialize express
         var app = express();
+
+        app.set( 'views', path.resolve( __dirname, '..', 'app/views' ) );
+        app.set( 'view engine', 'ejs' );
+
         if( logging_level === 'd' ) { // Set up response logger
             app.use( logResponseBody );
         }
