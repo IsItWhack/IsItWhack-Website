@@ -4,6 +4,7 @@
     "password": "isitwhack",
     "database": "isitwhack_development",
     "host": "127.0.0.1",
+    "port": 5433,
     "dialect": "postgres"
   },
   "test": {
@@ -11,6 +12,7 @@
     "password": "isitwhack",
     "database": "isitwhack_test",
     "host": "127.0.0.1",
+    "port": 5433,
     "dialect": "postgres"
   },
   "production": {
