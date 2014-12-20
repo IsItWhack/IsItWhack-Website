@@ -11,7 +11,10 @@
     var models = require( '../app/models' ),
         options_loader = require( '../lib/options_loader' );
 
-        models.init( options_loader.loadOptions( process.env.NODE_ENV ) );
+        var options = options_loader.loadOptions( process.env.NODE_ENV );
+        options.sequelize_logging = false;
+
+        models.init( options );
 
         var migrator = models.db.sequelize.getMigrator( {
             path: process.cwd() + '/migrations',
