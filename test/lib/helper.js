@@ -23,6 +23,7 @@
      */
     function _deleteAll() {
         var models = require( '../../app/models' ),
+            options_loader = require( '../../lib/options_loader' ),
             Sequelize = require( 'sequelize' ),
             q = require( 'q' );
 
@@ -47,16 +48,9 @@
 
     module.exports.before = function() {
         return server
-            .start( {
-                database_name: 'isitwhack_test',
-                sequelize_logging: console.log,
-                logging_level: 'd'
-            } )
+            .start( options_loader.loadOptions( process.env.NODE_ENV || 'test' ) )
             .then( function wipeDatabase( db ) {
                 return _deleteAll();
-            } )
-            .then( function() {
-
             } );
     };
 
