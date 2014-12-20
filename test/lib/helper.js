@@ -8,7 +8,8 @@
 (function() {
     'use strict';
 
-    var server = require( '../../bin/server' );
+    var server = require( '../../bin/server' ),
+        options_loader = require( '../../lib/options_loader' );
 
     var classes_to_delete = [
         'User',
@@ -23,7 +24,6 @@
      */
     function _deleteAll() {
         var models = require( '../../app/models' ),
-            options_loader = require( '../../lib/options_loader' ),
             Sequelize = require( 'sequelize' ),
             q = require( 'q' );
 
