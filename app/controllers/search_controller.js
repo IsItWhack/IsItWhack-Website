@@ -19,9 +19,40 @@
     var url_name = 'search';
     module.exports.url_name = url_name;
 
+    var _rateableToHtml = function() {
+        return function( rateable ) {
+            var html = "";
+            html += "<html>";
+            html += "<head>";
+            html += "<title>IsItWhack: " + rateable.name + "</title>";
+            html += "</head>";
+            html += "<body>";
+            html += "<center><h1>" + rateable.name + " is " + ((rateable.computed_votes > 0)?"not whack":"whack") + "</h1></center>";
+            html += "</body>";
+            html += "</html>";
+
+            return html;
+        };
+    };
+
     var search = function( req, res, next ) {
         console.log( req.param( 'q' ) );
-        res.redirect( 'http://interstellar.' + req.headers.host );
+        Rateable
+            .get( {
+                where: {
+                    name: req.param( 'q' )
+                }
+            }, {
+                transaction: req.transaction
+            } )
+            .then( function( rateable ) {
+                if( !rateable ) throw 'Rateable not found';
+                console.log( rateable );
+                return rateable.dataValues;
+            } )
+            .then( _rateableToHtml() )
+            .then( controller.commitAndSend( req.transaction, res ) )
+            .catch( controller.rollbackAndFail( req.transaction, next ) );
     };
 
     module.exports.addRoutes = function( app ) {
