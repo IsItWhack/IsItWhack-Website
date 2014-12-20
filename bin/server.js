@@ -100,6 +100,10 @@
 
         app.all( '/tokens', app.oauth.grant() );
 
+        app.get( '/test', function( req, res ) {
+            res.send( 'test' );
+        } );
+
         app.use( express.static( path.resolve( __dirname, '..', 'public' ) ) );
 
         server = app.listen( port, function listenCallback() {
