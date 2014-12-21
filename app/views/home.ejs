@@ -1,0 +1,28 @@
+<%= include templates/header %>
+<style>
+    body {
+        font-family: 'Open Sans', sans-serif;
+        text-align: center;
+    }
+    h1 {
+        font-size: 60px;
+        padding: 0px;
+        margin: 0px;
+    }
+    #search_bar {
+        font-size: 60px;
+        height: 80;
+        width: 800px;
+    }
+    #instruction {
+        color: #AAA;
+    }
+</style>
+<form action="/search" method="GET">
+    <h1>
+        Ask Me What's Whack
+        <input id="search_bar" type="text" name="q" />
+    </h1>
+</form>
+
+<%= include templates/footer %>
