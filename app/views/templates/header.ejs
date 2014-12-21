@@ -5,5 +5,11 @@
 
     <link href="styles/reset.css" rel="stylesheet" type="text/css" />
     <link href="styles/style.css" rel="stylesheet" type="text/css" />
+
+    <% if( locals.scripts ) { %>
+        <% locals.scripts.forEach( function( script ) { %>
+            <script src="<%= script %>" type="text/javascript"></script>
+        <% } ); %>
+    <% } %>
 </head>
 <body>
