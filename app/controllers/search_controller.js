@@ -19,22 +19,6 @@
     var url_name = 'search';
     module.exports.url_name = url_name;
 
-    var _rateableToHtml = function() {
-        return function( rateable ) {
-            var html = "";
-            html += "<html>";
-            html += "<head>";
-            html += "<title>IsItWhack: " + rateable.name + "</title>";
-            html += "</head>";
-            html += "<body>";
-            html += "<center><h1>" + rateable.name + " is " + ((rateable.computed_votes > 0)?"not whack":"whack") + "</h1></center>";
-            html += "</body>";
-            html += "</html>";
-
-            return html;
-        };
-    };
-
     var search = function( req, res, next ) {
         console.log( req.param( 'q' ) );
         Rateable
