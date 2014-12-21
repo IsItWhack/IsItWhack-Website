@@ -30,12 +30,11 @@
                 transaction: req.transaction
             } )
             .then( function( rateable ) {
-                if( !rateable ) throw 'Rateable not found';
-                console.log( rateable );
-                return rateable.dataValues;
+                if( !rateable ) return res.render( 'search_not_found', { rateable: { name: req.param( 'q' ) } } );
+                res.render( 'search', { rateable: rateable.dataValues } );
             } )
             .then( function( rateable ) {
-                res.render( 'search', { rateable: rateable } );
+
             } )
             .catch( controller.rollbackAndFail( req.transaction, next ) );
     };
