@@ -25,15 +25,8 @@
     };
 
     $( document ).ready( function() {
-        lastScrollTop = $(this).scrollTop();
-        $( window ).scroll( function( mes ) {
-            var scrollTop = $(this ).scrollTop();
-            if( scrollTop < lastScrollTop ) { // Scroll up
-                startScroll( "#search_main" );
-            } else { // Scroll down
-                startScroll( "#search_after" );
-            }
-            lastScrollTop = scrollTop;
+        $( "#search_down_arrow" ).click( function() {
+            startScroll( "#search_after" )
         } );
     } );
 
