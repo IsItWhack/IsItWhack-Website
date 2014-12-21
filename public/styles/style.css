@@ -12,6 +12,10 @@ h1 {
     font-size: 100pt;
 }
 
+h2 {
+    font-size: 60pt;
+}
+
 .underlined {
     text-decoration: underline;
 }
@@ -67,5 +71,30 @@ a, a:link, a:visited {
 }
 
 #search_after {
-    height: 100vh;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+#search_vote_text {
+    margin-top: 30pt;
+}
+
+#search_vote_up {
+    color: #5ccc5c;
+    cursor: pointer;
+}
+
+#search_vote_up:hover {
+    color: #8fcc8f;
+}
+
+#search_vote_down {
+    color: #CD5C5C;
+    cursor: pointer;
+}
+
+#search_vote_down:hover {
+    color: #cc8f8f;
+    cursor: pointer;
 }
