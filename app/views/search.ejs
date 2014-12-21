@@ -1,8 +1,15 @@
 <% locals.header = locals.rateable.name %>
 <%= include templates/header %>
 
-<center>
-    <h1><%= locals.rateable.name %> is whack</h1>
-</center>
+<div id="search_main">
+    <div id="search_main_middle">
+        <div id="search_main_inner">
+            <h1><%= locals.rateable.name %> is whack</h1>
+        </div>
+    </div>
+</div>
+<div id="search_after">
+    More Information About Rateable goes here
+</div>
 
 <%= include templates/footer %>

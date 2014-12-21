@@ -1,0 +1,41 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+h1 {
+    font-size: 100pt;
+}
+
+.center_center {
+    margin: 0px auto;
+}
+
+.inline_block {
+    display: inline-block;
+}
+
+#search_main {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+#search_main_middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#search_main_inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+}
+
+#search_after {
+    height: 100vh;
+}
