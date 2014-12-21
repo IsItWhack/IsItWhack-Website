@@ -1,10 +1,18 @@
 <% locals.header = locals.rateable.name %>
+<% locals.scripts = [ 'javascript/search_result.js' ] %>
 <%= include templates/header %>
 
 <div id="search_main">
-    <div id="search_main_middle">
-        <div id="search_main_inner">
-            <h1><%= locals.rateable.name %> is whack</h1>
+    <div id="search_main_row">
+        <div id="search_main_middle">
+            <div id="search_main_inner">
+                <h1><%= locals.rateable.name %> is whack</h1>
+            </div>
+        </div>
+    </div>
+    <div id="search_main_row">
+        <div id="search_main_bottom">
+            V
         </div>
     </div>
 </div>

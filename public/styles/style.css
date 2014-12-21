@@ -24,9 +24,20 @@ h1 {
     width: 100%;
 }
 
+#search_main_row {
+    display: table-row;
+}
+
 #search_main_middle {
     display: table-cell;
     vertical-align: middle;
+}
+
+#search_main_bottom {
+    display: table-cell;
+    vertical-align: bottom;
+    height: 1px;
+    text-align: center;
 }
 
 #search_main_inner {
