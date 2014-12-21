@@ -6,7 +6,7 @@
     <div id="search_main_row">
         <div id="search_main_middle">
             <div id="search_main_inner">
-                <h1><%= locals.rateable.name %> is whack</h1>
+                <h1><%= locals.rateable.name %> <% if( locals.rateable.computed_votes > 0 ) { %>is not whack<% } else { %>is whack<% } %></h1>
             </div>
         </div>
     </div>
