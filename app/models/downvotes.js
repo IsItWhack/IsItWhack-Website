@@ -9,10 +9,12 @@
     'use strict';
 
     module.exports = function initDownvote( sequelize, DataTypes ) {
-        var Downvote = sequelize.define( 'Downvote', {}, {
+        var Downvote = sequelize.define( 'Downvote', {
+            rateable_id: DataTypes.INTEGER
+        }, {
             underscored: true,
             associate: function( models ) {
-                models.Upvote.belongsTo( models.User, { foreignKey: 'user_id', as: 'user' } );
+                models.Downvote.belongsTo( models.User, { foreignKey: 'user_id', as: 'user' } );
                 models.Downvote.belongsTo( models.Rateable, { foreignKey: 'rateable_id', as: 'rateable' } );
             },
             classMethods: {

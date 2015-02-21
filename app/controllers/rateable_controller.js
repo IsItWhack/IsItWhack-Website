@@ -67,7 +67,7 @@
 
     var _createRateable = function( transaction ) {
         return function( req ) {
-            req.body.user_id = req.user.id;
+            req.body.user_id = 1;
 
             // Add user_id to editable fields for creation
             var editableFields = Rateable.editableFields;
@@ -121,9 +121,9 @@
     };
 
     module.exports.addRoutes = function( app ) {
-        app.get( '/' + url_name,  app.oauth.authorise(), allRateables );
+        app.get( '/' + url_name, allRateables );
         app.get( '/' + url_name + '/:' + url_param_name,  app.oauth.authorise(), getRateable );
-        app.post( '/' + url_name,  app.oauth.authorise(), createRateable );
+        app.post( '/' + url_name, createRateable );
         app.put( '/' + url_name + '/:' + url_param_name,  app.oauth.authorise(), editRateable );
     };
 })();

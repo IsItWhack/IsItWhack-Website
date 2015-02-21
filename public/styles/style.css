@@ -80,21 +80,21 @@ a, a:link, a:visited {
     margin-top: 30pt;
 }
 
-#search_vote_up {
+.vote_up {
     color: #5ccc5c;
     cursor: pointer;
 }
 
-#search_vote_up:hover {
+.vote_up:hover {
     color: #8fcc8f;
 }
 
-#search_vote_down {
+.vote_down {
     color: #CD5C5C;
     cursor: pointer;
 }
 
-#search_vote_down:hover {
+.vote_down:hover {
     color: #cc8f8f;
     cursor: pointer;
 }

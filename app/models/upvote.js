@@ -15,7 +15,7 @@
             underscored: true,
             associate: function( models ) {
                 models.Upvote.belongsTo( models.User, { foreignKey: 'user_id', as: 'user' } );
-                models.Downvote.belongsTo( models.Rateable, { foreignKey: 'rateable_id', as: 'rateable' } );
+                models.Upvote.belongsTo( models.Rateable, { foreignKey: 'rateable_id', as: 'rateable' } );
             },
             classMethods: {
                 publicFields: [

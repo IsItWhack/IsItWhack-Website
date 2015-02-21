@@ -1,12 +1,12 @@
 <% locals.header = locals.rateable.name %>
-<% locals.scripts = [ 'javascript/search_result.js' ] %>
+<% locals.scripts = [ 'javascript/search_result.js', 'javascript/found_result.js' ] %>
 <%= include templates/header %>
 
 <div id="search_main">
     <div id="search_main_row">
         <div id="search_main_middle">
             <div id="search_main_inner">
-                <h1><a <% if( locals.rateable.link ) { %>class="underlined" href="<%= locals.rateable.link %>"<% } %>><%= locals.rateable.name %></a> <% if( locals.rateable.computed_votes > 0 ) { %>is not whack<% } else { %>is whack<% } %></h1>
+                <h1><a <% if( locals.rateable.link ) { %>class="underlined" href="<%= locals.rateable.link %>"<% } %>><%= locals.rateable.name %></a> <% if( locals.rateable.computed_votes > 0 ) { %>is whack<% } else { %>is not whack<% } %></h1>
             </div>
         </div>
     </div>
@@ -21,10 +21,11 @@
         <div id="search_main_middle">
             <div id="search_main_inner">
                 <h1>What do you think?</h1>
-                <h2 id="search_vote_text"><span id="search_vote_up">Whack</span> <span id="search_vote_down">Not Whack</span></h2>
+                <h2 id="search_vote_text"><span id="found_vote_up" class="vote_up">Whack</span> <span id="found_vote_down" class="vote_down">Not Whack</span></h2>
             </div>
         </div>
     </div>
 </div>
+<div style="display: none; clear: both;" id="rateable_id"><%= locals.rateable.id %></div>
 
 <%= include templates/footer %>

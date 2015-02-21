@@ -48,12 +48,12 @@
         rateable_controller
             .checkForIdParam( req )
             .then( rateable_controller.getRateableFromParam( req.transaction ) )
-            .then( _createVote( req.transaction, req.user.id, req.body ) )
+            .then( _createVote( req.transaction, 1, req.body ) )
             .then( controller.commitAndSend( req.transaction, res ) )
             .catch( controller.rollbackAndFail( req.transaction, next ) );
     };
 
     module.exports.addRoutes = function( app ) {
-        app.post( '/' + rateable_controller.url_name + '/:' + rateable_controller.url_param_name + '/' + url_name, app.oauth.authorise(), addVote );
+        app.post( '/' + rateable_controller.url_name + '/:' + rateable_controller.url_param_name + '/' + url_name, addVote );
     };
 })();
